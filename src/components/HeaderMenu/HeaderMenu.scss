@@ -1,0 +1,21 @@
+$primary-black: #414141;
+$primary-white: #f2f2f2;
+$light-grey: #C2C2C2;
+$dark-grey: #8E8E93;
+$primary-blue: #64D2FF;
+
+.header-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 10%;
+  position: sticky;
+}
+
+span {
+  margin-right: 16px;
+  color: $primary-black;
+}
+h5 {
+  color: $primary-black;
+}

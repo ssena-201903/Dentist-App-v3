@@ -1,0 +1,141 @@
+$primary-black: #414141;
+$primary-white: #f2f2f2;
+$primary-blue: #64D2FF;
+$font-aeonik: "Aeonik TRIAL", "sans-serif";
+
+@mixin menu-item-styles {
+  list-style: none;
+  padding: 16px;
+  margin: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 8px;
+  color: $primary-white;
+
+  i {
+    margin-right: 16px;
+  }
+
+  &:hover {
+    background-color: $primary-blue;
+    color: $primary-black;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 18%;
+  height: 100vh;
+  background-color: $primary-black;
+  
+
+  .profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    height: fit-content;
+    padding: 8px 16px;
+    margin: 0 10px;
+    border-bottom: 0.1px solid $primary-white;
+
+    .pp-names {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 16px;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+
+      .names {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        p:nth-child(1) {
+          color: $primary-white;
+          font-size: 16px;
+          font-weight: 600;
+          margin: 2px;
+        }
+        p:nth-child(2) {
+          color: $primary-white;
+          font-size: 12px;
+          font-weight: 100;
+        }
+      }
+    }
+    i {
+      color: $primary-white;
+      font-size: 20px;
+      margin-left: auto;
+    }
+    i:hover {
+      color: $primary-blue;
+      cursor: pointer;
+    }
+  }
+
+  .menus {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin: 10px 0 20px 0;
+
+    .navbar-top-menu {
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+  
+      ul {
+        padding: 0;
+        margin: 0;
+  
+        li {
+          @include menu-item-styles;
+        }
+      }
+    }
+  
+    .navbar-bottom-menu {
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+  
+      ul {
+        padding: 0;
+        margin: 0;
+  
+        li {
+          @include menu-item-styles;
+          padding: 8px 16px;
+          margin-left: 4px;
+        }
+        li:hover {
+          background-color: #414141;
+          color: $primary-blue;
+        }
+      }
+    }
+  
+  }
+}
