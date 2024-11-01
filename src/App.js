@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar.js";
 import PrimaryButton from "./components/Buttons/PrimaryButton.js";
 import HeaderMenu from "./components/HeaderMenu/HeaderMenu.js";
@@ -10,8 +10,11 @@ import MoreInfoCard from "./components/PatientDetails/MoreInfoCard.js";
 
 import Model from "./components/PatientDetails/Model.js";
 
-import patientsData from "./patients_gendered.json";
+// import patientsData from "./patients_gendered.json";
 // import AddPatient from "./AddPatient.js";
+
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "./firebaseConfig.js";
 
 import "font-awesome/css/font-awesome.min.css";
 // import EventsList from "./components/EventsList/EventsList.js";
@@ -24,19 +27,39 @@ function App() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   //selected patient from the patients list
   const [selectedPatient, setSelectedPatient] = useState(null);
+  //to store patients
+  const [patients, setPatients] = useState([]);
   // show MoreInfoCard Component
   const [showMoreInfoCard, setShowMoreInfoCard] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  //fetching data from firebase
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const patientsCollection = collection(db, "patients");
+        const patientsSnapshot = await getDocs(patientsCollection);
+        const patientsList = patientsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPatients(patientsList);
+      } catch (error) {
+        console.log("could not load data:", error);
+      }
+    };
+    fetchPatients();
+  }, []);
+
+  const handlePatientSelect = (id) => {
+    const patient = patients.find((patient) => patient.id === id); //find patient
+    setSelectedPatient(patient); //add patient to state
+  };
 
   //HANDLE FUNCTIONS
   //the function to go back
   const handleBack = () => {
     window.history.back();
-  };
-
-  const handlePatientSelect = (id) => {
-    const patient = patientsData.find((patient) => patient.id === id); //find patient
-    setSelectedPatient(patient); //add patient to state
   };
 
   const handleDatePicker = () => {
@@ -153,14 +176,14 @@ function App() {
           <div className="overlay" onClick={handleCloseMoreInfoCard}></div>
 
           <MoreInfoCard
-          ChronicHealthCondition="Diabetes"
-          DrugAllergy="Penicillin"
-          MedicationsState="Insulin"
-          CheckUpFrequency="Every 6 months"
-          BrushingHabit="Twice a day"
-          PainStateAwake="Yes"
-          Cigarette="No"
-        />
+            ChronicHealthCondition="Diabetes"
+            DrugAllergy="Penicillin"
+            MedicationsState="Insulin"
+            CheckUpFrequency="Every 6 months"
+            BrushingHabit="Twice a day"
+            PainStateAwake="Yes"
+            Cigarette="No"
+          />
         </>
       )}
     </div>
