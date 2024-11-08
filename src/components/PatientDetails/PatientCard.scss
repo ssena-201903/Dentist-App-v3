@@ -6,31 +6,34 @@ $primary-blue: #64d2ff;
 
 .patient-card {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 20px;
+    width: 90%;
 
     .profile-section {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        margin: 20px;
         padding: 8px 20px;
         width: 90%;
+        height: 80px;
         border-radius: 8px;
-        background-color: $primary-black;
+        // background-color: $primary-black;
+        border: 1px solid $light-grey;
 
         img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            margin-right: 16px;
+            margin-right: 12px;
             border: 1px solid $primary-white;
         }
         h5 {
-            color: $primary-white;
-            font-size: 20px;
+            color: $primary-black;
+            font-size: 16px;
         }
 
         .info-section {
@@ -47,19 +50,46 @@ $primary-blue: #64d2ff;
                 margin-right: 30px;
     
                 h6 {
-                    color: $primary-white;
+                    color: $primary-black;
                     font-size: 16px;
-                    font-weight: 600;
+                    font-weight: 400;
                     margin-right: 16px;
                 }
                 p {
-                    color: $primary-white;
-                    font-size: 20px;
-                    font-weight: 300;
-                    margin-top: 2px;
+                    color: $primary-black;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-top: 8px;
                 }
             }
         }
+    }  
+    .price-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        margin: 20px;
+        // padding: 8px 20px;
+        width: 10%;
+        height: 80px;
+        // border-radius: 8px;
+        // background-color: $primary-black;
+        // border: 1px solid $light-grey;
+
+        h5 {
+            font-size: 16px;
+            font-weight: 400;
+            color: $primary-black;
+        }
+        p {
+            font-size: 36px;
+            font-weight: 600;
+            color: $primary-black;
+            span {
+                font-size: 24px;
+                font-weight: 400;
+            }
+        }
     }
-    
 }

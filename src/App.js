@@ -51,12 +51,12 @@ function App() {
     fetchPatients();
   }, []);
 
+  //HANDLE FUNCTIONS
+  //getting patient by using id
   const handlePatientSelect = (id) => {
     const patient = patients.find((patient) => patient.id === id); //find patient
     setSelectedPatient(patient); //add patient to state
   };
-
-  //HANDLE FUNCTIONS
   //the function to go back
   const handleBack = () => {
     window.history.back();

@@ -22,6 +22,10 @@ const PatientCard = ({ ppPath, Name, Gender, BMI, Age }) => {
           </div>
         </div>
       </div>
+      <div className="price-section">
+        <h5>Price</h5>
+        <p><span>$</span>70</p>
+      </div>
     </div>
   );
 };

@@ -39,7 +39,7 @@ $primary-blue: #64d2ff;
       }
     }
     &.selected {
-      background-color: $primary-blue;
+      background-color: $primary-black;
       border: none;
 
       p {
@@ -77,10 +77,11 @@ $primary-blue: #64d2ff;
     }
   }
   h5 {
-    background-color: $primary-black;
+    border: 1px solid $light-grey;
     color: $primary-blue;
     border-radius: 8px;
     padding: 16px;
     margin: 10px 0;
+    height: 95%;
   }
 }
