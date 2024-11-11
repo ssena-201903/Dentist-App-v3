@@ -7,17 +7,17 @@ const Home = ({handleFuturePatients}) => {
   return (
     <div className="home">
       <div className="relative-home">
-        <h3>Welcome Back !</h3>
+        <h3>Welcome !</h3>
         <div className="entry-pp">
             <img src={doctorProfile} alt="doctor_profile"></img>
         </div>
       </div>
       <div className="home-bottom">
         <div className="entry-text">
-          <h5>Joe Atlas</h5>
+          <h5>D.M.D Joe Atlas</h5>
           <div className="paragraph">
             <p>
-              Today you have <span>8</span> patients, if you're ready... Let's
+              Today you have <span>5</span> patients, if you're ready... Let's
               start!
             </p>
             <p>You can see other settings from the menu</p>

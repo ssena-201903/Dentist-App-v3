@@ -24,6 +24,11 @@ $font-aeonik: "Aeonik TRIAL", "sans-serif";
     cursor: pointer;
     font-weight: 600;
   }
+  &.active {
+    background-color: $primary-blue;
+    color: $primary-black;
+    font-weight: 600;
+  }
 }
 
 .navbar {

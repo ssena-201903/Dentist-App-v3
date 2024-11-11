@@ -1,7 +1,15 @@
-import React from "react";
+// import React, { useState } from "react";
+import doctorProfile from "../doc_pp.jpg";
 import "./Navbar.scss";
 
-const Navbar = ({ onMenuItemSelect }) => {
+const Navbar = ({ onMenuItemSelect, selectedMenuItem }) => {
+  // const [activeMenuItem, setActiveMenuItem] = useState("Home");
+
+  // const handleMenuClick = (itemName) => {
+  //   setActiveMenuItem(itemName);
+  //   onMenuItemSelect(itemName);
+  // };
+
   const menuItems = [
     { name: "Home", icon: "fa-solid fa-home" },
     { name: "Urgent Patients", icon: "fa-solid fa-user-injured" },
@@ -19,7 +27,7 @@ const Navbar = ({ onMenuItemSelect }) => {
     <div className="navbar">
       <div className="profile">
         <div className="pp-names">
-          <img src={require("../doc_pp.jpg")} alt="doctor pp" />
+          <img src={doctorProfile} alt="doctor pp" />
 
           <div className="names">
             <p> {doctorName} </p>
@@ -32,7 +40,11 @@ const Navbar = ({ onMenuItemSelect }) => {
         <div className="navbar-top-menu">
           <ul>
             {menuItems.map((item, index) => (
-              <li key={index} onClick={() => onMenuItemSelect(item.name)}>
+              <li
+                key={index}
+                onClick={() => onMenuItemSelect(item.name)}
+                className={selectedMenuItem === item.name ? "active" : ""}
+              >
                 <i className={item.icon}></i> {item.name}
               </li>
             ))}
