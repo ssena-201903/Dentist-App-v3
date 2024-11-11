@@ -104,6 +104,15 @@ body {
       }
     }
   }
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 82%;
+    height: 100vh;
+    overflow: hidden;
+    margin: auto;
+  }
 }
 
 .App-logo {

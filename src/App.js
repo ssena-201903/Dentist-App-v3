@@ -7,6 +7,7 @@ import EventItem from "./components/EventsList/EventItem.js";
 import PickADate from "./components/PickADate/PickADate.js";
 import PatientCard from "./components/PatientDetails/PatientCard.js";
 import MoreInfoCard from "./components/PatientDetails/MoreInfoCard.js";
+import Home from "./components/Home/Home.js";
 
 import Model from "./components/PatientDetails/Model.js";
 
@@ -35,6 +36,10 @@ function App() {
   const [isActive, setIsActive] = useState(false);
   // to control patient-details div's visibility
   const [showPatientDetails, setShowPatientDetails] = useState(false);
+  // show future patients
+  const [showFuturePatients, setShowFuturePatients] = useState(false);
+  // show side-bar
+  const [showSideBar, setShowSideBar] = useState(false);
 
   //fetching data from firebase
   useEffect(() => {
@@ -92,83 +97,104 @@ function App() {
     setIsActive(false);
   };
 
+  const handleFuturePatients = () => {
+    setShowFuturePatients(true);
+    setShowSideBar(true);
+  };
+
   return (
     <div className="app">
       <div className="navbar">
         <Navbar onMenuItemSelect={handleMenuItemSelect} />
       </div>
-      <div className="side-bar">
-        <div className="menu-header">
-          <HeaderMenu
-            text="Future Events"
-            selectedMenuItem={selectedMenuItem}
-            onClick={handleBack}
-          />
+      {!showSideBar && ( // show home when side-bar is hidden
+        <div className="home">
+          <Home handleFuturePatients={handleFuturePatients} />
         </div>
-        <div className="menu-bar">
-          <div className="event-list">
-            <div className="header-events">
-              <h6>
-                {chosenDate
-                  ? chosenDate.toDateString() === new Date().toDateString()
-                    ? "Today"
-                    : chosenDate.toLocaleDateString()
-                  : "Today"}
-              </h6>
-              <PrimaryButton
-                text="Pick a date"
-                onClick={handleDatePicker}
-                fontSize="14px"
-              />
-            </div>
-            <div className="event-items">
-              <EventItem
-                selectedDate={
-                  chosenDate
-                    ? chosenDate.toLocaleDateString("tr-TR").replace(/\//g, ".")
-                    : ""
-                }
-                onPatientSelect={handlePatientSelect}
-              />
-            </div>
+      )}
+      {showSideBar && ( // show side-bar when it's activated
+        <div
+          className="side-bar"
+          style={{ display: "block" ? showFuturePatients : "none" }}
+        >
+          <div className="menu-header">
+            <HeaderMenu
+              text="Future Events"
+              selectedMenuItem={selectedMenuItem}
+              onClick={handleBack}
+            />
           </div>
-          <div className="patient-details" style={{display: showPatientDetails ? 'block' : 'none'}}>
-            <div className="btn-patient-details">
-              <div className="btn-right">
+          <div className="menu-bar">
+            <div className="event-list">
+              <div className="header-events">
+                <h6>
+                  {chosenDate
+                    ? chosenDate.toDateString() === new Date().toDateString()
+                      ? "Today"
+                      : chosenDate.toLocaleDateString()
+                    : "Today"}
+                </h6>
                 <PrimaryButton
-                  text="More Information About Patient"
-                  onClick={handleMoreInfoClick}
-                  fontSize="14px"
-                  isActive={isActive}
-                />
-                <PrimaryButton
-                  text="Operation History"
-                  onClick={handleBack}
+                  text="Pick a date"
+                  onClick={handleDatePicker}
                   fontSize="14px"
                 />
               </div>
-              <PrimaryButton
-                text="Enter the result"
-                onClick={handleBack}
-                fontSize="14px"
-              />
-              {/* <AddPatient /> */}
+              <div className="event-items">
+                <EventItem
+                  selectedDate={
+                    chosenDate
+                      ? chosenDate
+                          .toLocaleDateString("tr-TR")
+                          .replace(/\//g, ".")
+                      : ""
+                  }
+                  onPatientSelect={handlePatientSelect}
+                />
+              </div>
             </div>
-            {selectedPatient && (
-              <PatientCard
-                ppPath={selectedPatient.photo}
-                Name={selectedPatient.name}
-                Gender={selectedPatient.gender}
-                BMI={selectedPatient.bmi}
-                Age={selectedPatient.age}
-              />
-            )}
-            <div className="model">
-              <Model />
+            <div
+              className="patient-details"
+              style={{ display: showPatientDetails ? "block" : "none" }}
+            >
+              <div className="btn-patient-details">
+                <div className="btn-right">
+                  <PrimaryButton
+                    text="More Information About Patient"
+                    onClick={handleMoreInfoClick}
+                    fontSize="14px"
+                    isActive={isActive}
+                  />
+                  <PrimaryButton
+                    text="Operation History"
+                    onClick={handleBack}
+                    fontSize="14px"
+                  />
+                </div>
+                <PrimaryButton
+                  text="Enter the result"
+                  onClick={handleBack}
+                  fontSize="14px"
+                />
+                {/* <AddPatient /> */}
+              </div>
+              {selectedPatient && (
+                <PatientCard
+                  ppPath={selectedPatient.photo}
+                  Name={selectedPatient.name}
+                  Gender={selectedPatient.gender}
+                  BMI={selectedPatient.bmi}
+                  Age={selectedPatient.age}
+                />
+              )}
+              <div className="model">
+                <Model />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
       {showDatePicker && (
         <PickADate
           onDateChange={handleDateChange}
