@@ -31,7 +31,10 @@ function App() {
   const [patients, setPatients] = useState([]);
   // show MoreInfoCard Component
   const [showMoreInfoCard, setShowMoreInfoCard] = useState(false);
+  //button activity
   const [isActive, setIsActive] = useState(false);
+  // to control patient-details div's visibility
+  const [showPatientDetails, setShowPatientDetails] = useState(false);
 
   //fetching data from firebase
   useEffect(() => {
@@ -56,6 +59,7 @@ function App() {
   const handlePatientSelect = (id) => {
     const patient = patients.find((patient) => patient.id === id); //find patient
     setSelectedPatient(patient); //add patient to state
+    setShowPatientDetails(true);
   };
   //the function to go back
   const handleBack = () => {
@@ -128,7 +132,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="patient-details">
+          <div className="patient-details" style={{display: showPatientDetails ? 'block' : 'none'}}>
             <div className="btn-patient-details">
               <div className="btn-right">
                 <PrimaryButton
