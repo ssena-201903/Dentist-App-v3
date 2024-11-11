@@ -17,19 +17,29 @@ const EventItem = ({ selectedDate, onPatientSelect }) => {
       try {
         const patientsCollection = collection(db, "patients"); 
         const patientsSnapshot = await getDocs(patientsCollection); 
-        const patientsList = patientsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); 
+        const patientsList = patientsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const defaultDate = "09.11.2024";
+        const selectedDateStr = selectedDate || defaultDate;
 
-        const today = new Date();
-        const selectedDateObj = new Date(selectedDate.split(".").reverse().join("-"));
+        const filteredPatients = patientsList.filter((patient) => {
+          const patientDateStr = patient.date;
+          return patientDateStr === selectedDateStr;
+        });
 
-        if (selectedDateObj < today) {
-          setPatients([]);
-        } else {
-          const filteredPatients = patientsList.filter(
-            (patient) => patient.date === selectedDate
-          );
-          setPatients(filteredPatients);
-        }
+        setPatients(filteredPatients);
+
+        // const today = new Date();
+        // const selectedDateObj = new Date(selectedDateStr.split(".").reverse().join("-"));
+
+        // if (selectedDateObj < today) {
+        //   setPatients([]);
+        // } else {
+        //   const filteredPatients = patientsList.filter(
+        //     (patient) => patient.date === selectedDate
+        //   );
+        //   setPatients(filteredPatients);
+        // }
       } catch (error) {
         console.error("Veriler alınamadı: ", error);
       }
