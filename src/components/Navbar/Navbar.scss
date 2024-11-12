@@ -20,13 +20,13 @@ $font-aeonik: "Aeonik TRIAL", "sans-serif";
 
   &:hover {
     background-color: $primary-blue;
-    color: $primary-black;
+    color: $primary-white;
     cursor: pointer;
     font-weight: 600;
   }
   &.active {
     background-color: $primary-blue;
-    color: $primary-black;
+    color: $primary-white;
     font-weight: 600;
   }
 }
